@@ -1,0 +1,27 @@
+{% extends 'mainapp/base.html' %}
+
+{% block title %}
+Arman Express - Login
+{% endblock %}
+
+{% block content %}
+
+    <h1>Login Page</h1><hr>
+    <br><br>
+
+    <div class="register-div">
+    <form method="POST">
+      {% csrf_token %}
+          <div class="form-floating mb-3">
+            <input type="text" name="username" class="form-control" placeholder="Username">
+            <label for="floatingInput">Username</label>
+          </div>
+          <div class="form-floating mb-3">
+            <input type="password" name="password" class="form-control" placeholder="Password">
+            <label for="floatingPassword">Password</label>
+          </div>
+        <button id="btn" class="login-register-btn">Login</button>
+    </form>
+    </div>
+
+{% endblock %}

@@ -1,0 +1,36 @@
+{% extends 'mainapp/base.html' %}
+
+{% block title %}
+Arman Express - Register
+{% endblock %}
+
+{% if form.errors %}
+    <p class="alert alert-warning">There was am error with your form</p>
+{% endif %}
+
+{% block content %}
+    <h1>Register Page</h1><hr>
+    <br><br>
+    <div class="register-div">
+        <form method="POST">
+            {% csrf_token %}
+              <div class="form-floating mb-3">
+                {{form.username}}
+                <label for="floatingInput">Username</label>
+              </div>
+              <div class="form-floating mb-3">
+                {{form.email}}
+                <label for="floatingInput">Email</label>
+              </div>
+              <div class="form-floating mb-3">
+                {{form.password1}}
+                <label for="floatingPassword">Password</label>
+              </div>
+              <div class="form-floating mb-3">
+                {{form.password2}}
+                <label for="floatingPassword">Repeat Password</label>
+              </div>
+            <button id="btn" class="login-register-btn">Register</button>
+        </form>
+    </div>
+{% endblock %}

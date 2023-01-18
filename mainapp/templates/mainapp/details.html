@@ -1,0 +1,37 @@
+{% extends 'mainapp/base.html' %}
+
+{% block title %}
+        Arman Express
+{% endblock %}
+
+{% block content %}
+
+        <h1>Details of post</h1>
+        <hr><br>
+        <h6>{{ post.author }}</h6>
+        <a href = "{% url 'category' post.category %}" class = "category-link"><p>{{ post.category }}</p></a>
+
+        {% if post.image %}
+                <img class="detail-img" src="{{post.image.url}}">
+        {% endif %}
+        
+        <p class="post-text">{{ post.content }}</p>
+        
+        Likes {{ total_likes }}
+        {% if user.is_authenticated %}
+                <form method="POST" action="{% url 'like' post.pk %}">
+                        {% csrf_token %}
+                        <button id="like-btn" class="" type="submit" name="like-post" value="{{ post.id }}"><i class="bi bi-hand-thumbs-up-fill"></i> Like</button>
+                </form>
+                <hr>
+                {%if user.id == post.author.id %}
+                        <form method="get" action="{% url 'update' post.pk %}">
+                                <button id="btn" class="edit-btn-detail" type="submit"><i class="bi bi-pen-fill"></i> Edit</button>
+                        </form>
+                        <form method="get" action="{% url 'delete' post.pk %}">
+                                <button id="del-btn" class="del-btn-detail" type="submit"><i class="bi bi-trash3-fill"></i> Delete</button>
+                        </form>
+                {% endif %}
+        {% endif %}
+
+{% endblock %}

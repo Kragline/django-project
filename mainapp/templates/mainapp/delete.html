@@ -1,0 +1,16 @@
+{% extends 'mainapp/base.html' %}
+
+{% block title %}
+Arman Express - Delete Post
+{% endblock %}
+
+{% block content %}
+    <h1>Delete Post Page</h1><hr>
+    <br><br>
+    <form method="POST" class="add-post">
+        {% csrf_token %}
+        <br><br>
+        <p class="alert alert-danger">Are you shure about that?!</p>
+        <br><br>
+        <button id="del-btn" class="del-btn"><i class="bi bi-trash3-fill"></i> Yes, I'm shure!</button>
+{% endblock %}

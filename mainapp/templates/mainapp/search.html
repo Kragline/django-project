@@ -1,0 +1,43 @@
+{% extends 'mainapp/base.html' %}
+
+{% block title %}
+Arman Express - Search
+{% endblock %}
+
+{% block content %}
+  <h1>Search Results</h1><hr>
+  {% if searched %}
+    <h2>You searched for {{searched}}</h2>
+    {% for result in results %}
+        <a class="text-decoration-none"  href="{% url 'detailview' result.pk %}">
+            <div class="content">
+              <h6>{{result.author.username}}</h6>
+              {% if result.image %}
+                <img class="index-img" src="{{result.image.url}}">
+              {% endif %}
+              <p class="post-text">{{result.content}}</p>
+              {% if user.is_authenticated %}
+              <div></div>
+                  <div class="move-div">
+                    <form method="POST" action="{% url 'like' result.pk %}">
+                      {% csrf_token %}
+                      <button id="like-btn" class="like-btn-index" type="submit" name="like-post" value="{{ result.id }}"><i class="bi bi-hand-thumbs-up-fill"></i> Like {{ total_likes }}</button>
+                    </form>
+                    {%if user.id == result.author.id %}
+                      <form method="get" action="{% url 'update' result.pk %}">
+                        <button id="btn" class="edit-btn-index" type="submit"><i class="bi bi-pen-fill"></i> Edit</button>
+                      </form>
+                      <form method="get" action="{% url 'delete' result.pk %}">
+                        <button id="del-btn" class="del-btn-index" type="submit"><i class="bi bi-trash3-fill"></i> Delete</button>
+                      </form>
+                    {% endif %}  
+                  </div>          
+              {% endif %}
+            </div>
+          </a>
+    {% endfor %}
+  {% else %}
+    <h2>You forgot to search something</h2>
+  {%endif%}
+
+{% endblock %}

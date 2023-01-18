@@ -1,0 +1,18 @@
+{% extends 'mainapp/base.html' %}
+
+{% block title %}
+Arman Express - Update Post
+{% endblock %}
+
+{% block content %}
+    {% if user.is_authenticated %}
+        {%if user.id == post.author.id %}
+            <h1>Update Post Page</h1><hr>
+            <br><br>
+            <form method="POST" class="add-post">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button id="btn" class="update-btn"><i class="bi bi-arrow-clockwise"></i> Update Post</button>
+        {% endif %}        
+    {% endif %}        
+{% endblock %}
